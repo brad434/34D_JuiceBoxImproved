@@ -14,14 +14,17 @@ datasource db {
 }
 
 model User {
-  id int @id @default(autoincrement())
+  id Int @id @default(autoincrement())
   username String @unique
   password String
+  posts Post[]
 }
 
 model Post {
-  id int @id @default(autoincrement()) 
+  id Int @id @default(autoincrement()) 
   title String
-  content String [note: 'Content of the post']
-  userId int [ref: > User.id]
+  content String?
+  userId Int
+
+  user User @relation(fields:[userId], references: [id])
 }

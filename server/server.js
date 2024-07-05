@@ -8,6 +8,9 @@ app.get("/", (req, res) => {
   res.send("Server is running");
 });
 
+app.use("/api", require("./api"));
+app.use("/auth", require("./auth"));
+
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
