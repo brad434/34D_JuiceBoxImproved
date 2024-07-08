@@ -7,12 +7,12 @@ const {
   updatePost,
   deletePost,
 } = require("../db/post");
-const { post } = require("../auth/authRoutes");
+// const { post } = require("../auth/authRoutes");
 const postsRouter = express.Router();
 
 postsRouter.get("/", requireUser, async (req, res, next) => {
   try {
-    const post = await getAllPosts();
+    const posts = await getAllPosts();
     res.send(posts);
   } catch (error) {
     next(error);
