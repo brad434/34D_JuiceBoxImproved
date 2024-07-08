@@ -51,6 +51,26 @@ postsRouter.put("/:id", requireUser, async (req, res, next) => {
     const post = await updatePost(id, { title, content }, req.user.id);
     if (post) {
       res.send(post);
+    } else {
+      res.status(403).send({ error: "You can only update your own posts" });
     }
-  } catch (error) {}
+  } catch (error) {
+    next(error);
+  }
 });
+
+postsRouter.delete("/:id", requireUser, async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const post = await deletePost(id, req.user.id);
+    if (post) {
+      res.send(post);
+    } else {
+      res.status(403).send({ error: "You can only delete your own posts" });
+    }
+  } catch (error) {
+    next(error);
+  }
+});
+
+module.exports = postsRouter;
