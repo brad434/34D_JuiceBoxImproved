@@ -25,6 +25,5 @@ model Post {
   title String
   content String?
   userId Int
-
   user User @relation(fields:[userId], references: [id])
 }
